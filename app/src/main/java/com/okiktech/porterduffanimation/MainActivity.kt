@@ -29,10 +29,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun GhostTextAnimation() {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+
 }
 
 @Preview(showBackground = true)
