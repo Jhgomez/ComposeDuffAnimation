@@ -79,6 +79,16 @@ fun GhostTextAnimation() {
         ),
         label = "animated color"
     )
+
+    val animatedAngle by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(4000, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "animated angle"
+    )
 }
 
 @Preview(showBackground = true)
