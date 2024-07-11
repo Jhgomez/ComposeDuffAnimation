@@ -36,6 +36,7 @@ fun GhostTextAnimation() {
     val density = LocalDensity.current
 
     val textWidth = with(density) { 200.dp.toPx() }
+    val animatedwidth = with(density) { 170.dp.toPx() }
 
 }
 
