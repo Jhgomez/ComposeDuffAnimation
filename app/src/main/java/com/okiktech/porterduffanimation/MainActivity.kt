@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import com.okiktech.porterduffanimation.ui.theme.PorterDuffAnimationTheme
 
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GhostTextAnimation() {
     val context = LocalContext.current
-
+    val density = LocalDensity.current
 }
 
 @Preview(showBackground = true)
