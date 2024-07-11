@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.okiktech.porterduffanimation.ui.theme.PorterDuffAnimationTheme
 
@@ -29,6 +30,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun GhostTextAnimation() {
+    val context = LocalContext.current
 
 }
 
