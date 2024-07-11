@@ -8,7 +8,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.InfiniteTransition
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -16,7 +15,6 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -97,12 +95,12 @@ fun GhostTextAnimation() {
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        val ghostBitmap = remember {
+        val doggyBitmap = remember {
             BitmapFactory.decodeResource(context.resources, R.drawable.doggy)
         }
 
-        val resizedGhostBitmap = Bitmap.createScaledBitmap(
-            /* src = */ ghostBitmap,
+        val resizedDoggyBitmap = Bitmap.createScaledBitmap(
+            /* src = */ doggyBitmap,
             /* dstWidth = */ (textWidth / 2).toInt(),
             /* dstHeight = */ (textWidth / 2).toInt(),
             /* filter = */ true
