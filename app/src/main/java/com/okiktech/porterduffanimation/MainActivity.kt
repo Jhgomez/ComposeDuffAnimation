@@ -1,5 +1,6 @@
 package com.okiktech.porterduffanimation
 
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -99,6 +100,13 @@ fun GhostTextAnimation() {
         val ghostBitmap = remember {
             BitmapFactory.decodeResource(context.resources, R.drawable.doggy)
         }
+
+        val resizedGhostBitmap = Bitmap.createScaledBitmap(
+            /* src = */ ghostBitmap,
+            /* dstWidth = */ (textWidth / 2).toInt(),
+            /* dstHeight = */ (textWidth / 2).toInt(),
+            /* filter = */ true
+        )
     }
 }
 
