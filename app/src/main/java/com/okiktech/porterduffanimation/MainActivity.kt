@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PorterDuffAnimationTheme {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-
+                    GhostTextAnimation(name =)
                 }
             }
         }
@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun GhostTextAnimation(name: String, modifier: Modifier = Modifier) {
+fun GhostTextAnimation() {
     Text(
         text = "Hello $name!",
         modifier = modifier
