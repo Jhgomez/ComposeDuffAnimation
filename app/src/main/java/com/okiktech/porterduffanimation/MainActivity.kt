@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PorterDuffAnimationTheme {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    GhostTextAnimation(name =)
+                    GhostTextAnimation()
                 }
             }
         }
@@ -39,6 +39,6 @@ fun GhostTextAnimation() {
 @Composable
 fun GreetingPreview() {
     PorterDuffAnimationTheme {
-        GhostTextAnimation("Android")
+        GhostTextAnimation()
     }
 }
