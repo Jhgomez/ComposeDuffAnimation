@@ -80,7 +80,7 @@ fun GhostTextAnimation() {
         label = "animated color"
     )
 
-    val animatedAngle by infiniteTransition.animateFloat(
+    val rotatedAngle by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 360f,
         animationSpec = infiniteRepeatable(
@@ -89,6 +89,13 @@ fun GhostTextAnimation() {
         ),
         label = "animated angle"
     )
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxSize()
+    ) {
+
+    }
 }
 
 @Preview(showBackground = true)
