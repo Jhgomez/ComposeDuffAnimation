@@ -46,7 +46,7 @@ fun GhostTextAnimation() {
     val textWidth = with(density) { 200.dp.toPx() }
     val animatedwidth = with(density) { 170.dp.toPx() }
 
-    val infiniteTransition = rememberInfiniteTransition()
+    val infiniteTransition = rememberInfiniteTransition(label = "text infinite animation")
 
     val animatedOffset by infiniteTransition.animateFloat(
         initialValue = animatedwidth,
@@ -55,7 +55,7 @@ fun GhostTextAnimation() {
             animation = tween(400, easing = FastOutSlowInEasing),
             repeatMode = RepeatMode.Reverse
         ),
-        label = "animatedOffset"
+        label = "animated offset"
     )
 }
 
