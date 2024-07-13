@@ -126,6 +126,8 @@ fun GhostTextAnimation() {
                         size.height.toInt(),
                         Bitmap.Config.ARGB_8888
                     )
+                    val textCanvas = android.graphics.Canvas(textBitmap)
+
                 }
         )
     }
