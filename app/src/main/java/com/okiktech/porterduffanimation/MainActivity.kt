@@ -161,8 +161,7 @@ fun GhostTextAnimation() {
                         maskFilter = android.graphics.BlurMaskFilter(30f, android.graphics.BlurMaskFilter.Blur.OUTER)
                     }
 
-
-
+                    textCanvas.drawText("GHOST", textX, textY, glowPaint)
 //                    drawIntoCanvas { canvas ->
 ////                        canvas.nativeCanvas.drawText("GHOST", textX, textY, textPaint)
 //                        with(canvas.nativeCanvas) {
