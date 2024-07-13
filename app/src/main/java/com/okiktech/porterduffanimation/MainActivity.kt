@@ -29,10 +29,12 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.okiktech.porterduffanimation.ui.theme.PorterDuffAnimationTheme
 
 class MainActivity : ComponentActivity() {
@@ -128,6 +130,13 @@ fun GhostTextAnimation() {
                     )
                     val textCanvas = android.graphics.Canvas(textBitmap)
 
+                    val textPaint = android.graphics.Paint().apply {
+                        isAntiAlias = true
+                        textSize = 48.sp.toPx()
+                        color = animatedColor.toArgb()
+                        textAlign = android.graphics.Paint.Align.CENTER
+                        typeface = android.graphics.Typeface.create("", android.graphics.Typeface.BOLD)
+                    }
                 }
         )
     }
