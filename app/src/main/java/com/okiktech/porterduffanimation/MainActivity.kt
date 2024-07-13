@@ -1,11 +1,15 @@
 package com.okiktech.porterduffanimation
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.ColorSpace
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
@@ -13,6 +17,7 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,7 +33,11 @@ import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.CompositingStrategy
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.toAndroidColorSpace
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
@@ -51,6 +60,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@SuppressLint("NewApi")
 @Composable
 fun GhostTextAnimation() {
     val context = LocalContext.current
@@ -118,15 +128,17 @@ fun GhostTextAnimation() {
 
         Spacer(
             modifier = Modifier
-                .size(size = 400.dp)
-                .graphicsLayer(scaleX = animatedScale, scaleY = animatedScale)
+                .size(size = 200.dp)
+                .graphicsLayer(scaleX = animatedScale, scaleY = animatedScale, compositingStrategy = CompositingStrategy.Offscreen)
                 .drawWithContent {
                     drawContent()
 
                     val textBitmap = Bitmap.createBitmap(
                         size.width.toInt(),
                         size.height.toInt(),
-                        Bitmap.Config.ARGB_8888
+                        Bitmap.Config.ARGB_8888,
+                        false,
+                        animatedColor.colorSpace.toAndroidColorSpace()
                     )
                     val textCanvas = android.graphics.Canvas(textBitmap)
 
@@ -139,7 +151,7 @@ fun GhostTextAnimation() {
                     }
 
                     val textX = size.width / 2
-                    val textY = size.height / 2 - (textPaint.descent() - textPaint.ascent()) / 2
+                    val textY = size.height / 2 - (textPaint.ascent() + textPaint.descent())/2
                 }
         )
     }
