@@ -41,6 +41,7 @@ import androidx.compose.ui.graphics.toAndroidColorSpace
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.drawText
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -137,8 +138,8 @@ fun GhostTextAnimation() {
                         size.width.toInt(),
                         size.height.toInt(),
                         Bitmap.Config.ARGB_8888,
-//                        false,
-//                        animatedColor.colorSpace.toAndroidColorSpace()
+                        false,
+                        animatedColor.colorSpace.toAndroidColorSpace()
                     )
                     val textCanvas = android.graphics.Canvas(textBitmap)
 
@@ -154,6 +155,20 @@ fun GhostTextAnimation() {
                     val textY = size.height / 2 - (textPaint.ascent() + textPaint.descent())/2
 
                     textCanvas.drawText("GHOST", textX, textY, textPaint)
+
+                    val glowPaint = android.graphics.Paint().apply {
+                        color = animatedColor.copy(alpha = 0.5f).toArgb()
+                        maskFilter = android.graphics.BlurMaskFilter(30f, android.graphics.BlurMaskFilter.Blur.OUTER)
+                    }
+
+
+
+//                    drawIntoCanvas { canvas ->
+////                        canvas.nativeCanvas.drawText("GHOST", textX, textY, textPaint)
+//                        with(canvas.nativeCanvas) {
+//                            drawBitmap(textBitmap, 0f, 0f, null)
+//                        }
+//                    }
                 }
         )
     }
