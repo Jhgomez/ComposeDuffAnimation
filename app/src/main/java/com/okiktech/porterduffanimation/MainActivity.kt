@@ -137,6 +137,9 @@ fun GhostTextAnimation() {
                         textAlign = android.graphics.Paint.Align.CENTER
                         typeface = android.graphics.Typeface.create("", android.graphics.Typeface.BOLD)
                     }
+
+                    val textX = size.width / 2
+                    val textY = size.height / 2 - (textPaint.descent() - textPaint.ascent()) / 2
                 }
         )
     }
