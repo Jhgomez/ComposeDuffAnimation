@@ -137,8 +137,8 @@ fun GhostTextAnimation() {
                         size.width.toInt(),
                         size.height.toInt(),
                         Bitmap.Config.ARGB_8888,
-                        false,
-                        animatedColor.colorSpace.toAndroidColorSpace()
+//                        false,
+//                        animatedColor.colorSpace.toAndroidColorSpace()
                     )
                     val textCanvas = android.graphics.Canvas(textBitmap)
 
@@ -152,6 +152,8 @@ fun GhostTextAnimation() {
 
                     val textX = size.width / 2
                     val textY = size.height / 2 - (textPaint.ascent() + textPaint.descent())/2
+
+                    textCanvas.drawText("GHOST", textX, textY, textPaint)
                 }
         )
     }
