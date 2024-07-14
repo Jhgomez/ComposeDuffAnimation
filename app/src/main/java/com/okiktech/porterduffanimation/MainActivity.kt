@@ -194,6 +194,7 @@ fun GhostTextAnimation() {
                                 (xPosition * resizedDoggyBitmap.width /2),
                                 (yPosition * resizedDoggyBitmap.width /2)
                             )
+                            drawBitmap(resizedDoggyBitmap, xPosition, yPosition, paint)
                         }
                     }
                 }
