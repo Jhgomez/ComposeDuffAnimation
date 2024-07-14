@@ -188,7 +188,12 @@ fun GhostTextAnimation() {
 ////                        canvas.nativeCanvas.drawText("GHOST", textX, textY, textPaint)
                         with(canvas.nativeCanvas) {
                             drawBitmap(textBitmap, 0f, 0f, null)
-
+                            save()
+                            rotate(
+                                rotatedAngle,
+                                (xPosition * resizedDoggyBitmap.width /2),
+                                (yPosition * resizedDoggyBitmap.width /2)
+                            )
                         }
                     }
                 }
