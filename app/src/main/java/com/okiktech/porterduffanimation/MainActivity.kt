@@ -178,6 +178,10 @@ fun GhostTextAnimation() {
                     drawIntoCanvas { canvas ->
                         val layerPaint = android.graphics.Paint()
                         val saveLayerCount = canvas.nativeCanvas.saveLayer(null, layerPaint)
+                        val paint = android.graphics.Paint().apply {
+                            isAntiAlias = true
+                            xfermode = PorterDuffXfermode(PorterDuff.Mode.XOR)
+                        }
 //                        val saveLayerCount = canvas.saveLayer(size.toRect(), Paint())
 ////                        canvas.nativeCanvas.drawText("GHOST", textX, textY, textPaint)
 //                        with(canvas.nativeCanvas) {
