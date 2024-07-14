@@ -186,9 +186,10 @@ fun GhostTextAnimation() {
                         val yPosition = size.height / 2 - resizedDoggyBitmap.height / 2
 //                        val saveLayerCount = canvas.saveLayer(size.toRect(), Paint())
 ////                        canvas.nativeCanvas.drawText("GHOST", textX, textY, textPaint)
-//                        with(canvas.nativeCanvas) {
-//                            drawBitmap(textBitmap, 0f, 0f, null)
-//                        }
+                        with(canvas.nativeCanvas) {
+                            drawBitmap(textBitmap, 0f, 0f, null)
+
+                        }
                     }
                 }
         )
