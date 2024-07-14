@@ -182,6 +182,8 @@ fun GhostTextAnimation() {
                             isAntiAlias = true
                             xfermode = PorterDuffXfermode(PorterDuff.Mode.XOR)
                         }
+                        val xPosition = animatedOffset
+                        val yPosition = size.height / 2 - resizedDoggyBitmap.height / 2
 //                        val saveLayerCount = canvas.saveLayer(size.toRect(), Paint())
 ////                        canvas.nativeCanvas.drawText("GHOST", textX, textY, textPaint)
 //                        with(canvas.nativeCanvas) {
