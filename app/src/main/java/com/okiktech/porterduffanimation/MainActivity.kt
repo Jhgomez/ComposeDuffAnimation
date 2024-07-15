@@ -21,6 +21,7 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
@@ -37,6 +38,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.geometry.toRect
 import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.CompositingStrategy
@@ -47,9 +49,11 @@ import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toAndroidColorSpace
+import androidx.compose.ui.graphics.toAndroidRectF
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -76,7 +80,6 @@ fun GhostTextAnimation() {
     val context = LocalContext.current
     val density = LocalDensity.current
 
-    val textWidth = with(density) { 200.dp.toPx() }
     val animatedwidth = with(density) { 170.dp.toPx() }
 
     val infiniteTransition = rememberInfiniteTransition(label = "text infinite animation")
@@ -131,14 +134,14 @@ fun GhostTextAnimation() {
 
         val resizedDoggyBitmap = Bitmap.createScaledBitmap(
             /* src = */ doggyBitmap,
-            /* dstWidth = */ (textWidth / 2).toInt(),
-            /* dstHeight = */ (textWidth / 2).toInt(),
+            /* dstWidth = */ doggyBitmap.width/8,
+            /* dstHeight = */ doggyBitmap.height/8,
             /* filter = */ true
         )
 
         Spacer(
             modifier = Modifier
-                .size(size = 200.dp)
+                .size(size = 400.dp)
                 .graphicsLayer(scaleX = animatedScale, scaleY = animatedScale, compositingStrategy = CompositingStrategy.Offscreen)
                 .drawWithContent {
                     drawContent()
@@ -167,22 +170,22 @@ fun GhostTextAnimation() {
 
                     val glowPaint = android.graphics.Paint().apply {
 //                        xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OUT)
-//                        isAntiAlias = true
-//                        textSize = 48.sp.toPx()
-//                        color = animatedColor.toArgb()
+                        isAntiAlias = true
+                        textSize = 48.sp.toPx()
                         color = animatedColor.copy(alpha = 0.5f).toArgb()
+                        textAlign = android.graphics.Paint.Align.CENTER
                         maskFilter = android.graphics.BlurMaskFilter(30f, android.graphics.BlurMaskFilter.Blur.OUTER)
                     }
 
                     textCanvas.drawText("GHOST", textX, textY, glowPaint)
                     drawIntoCanvas { canvas ->
-                        val layerPaint = android.graphics.Paint()
-                        val saveLayerCount = canvas.nativeCanvas.saveLayer(null, layerPaint)
+//                        val layerPaint = android.graphics.Paint()
+//                        val saveLayerCount = canvas.nativeCanvas.saveLayer(null, layerPaint)
                         val paint = android.graphics.Paint().apply {
                             isAntiAlias = true
                             xfermode = PorterDuffXfermode(PorterDuff.Mode.XOR)
                         }
-                        val xPosition = animatedOffset
+                        val xPosition = size.width / 2
                         val yPosition = size.height / 2 - resizedDoggyBitmap.height / 2
 //                        val saveLayerCount = canvas.saveLayer(size.toRect(), Paint())
 ////                        canvas.nativeCanvas.drawText("GHOST", textX, textY, textPaint)
@@ -191,10 +194,12 @@ fun GhostTextAnimation() {
                             save()
                             rotate(
                                 rotatedAngle,
-                                (xPosition * resizedDoggyBitmap.width /2),
-                                (yPosition * resizedDoggyBitmap.width /2)
+                                (xPosition + resizedDoggyBitmap.width / 2),
+                                (yPosition + resizedDoggyBitmap.height / 2)
                             )
                             drawBitmap(resizedDoggyBitmap, xPosition, yPosition, paint)
+                            restore()
+//                            restoreToCount(saveLayerCount)
                         }
                     }
                 }
